@@ -20,7 +20,7 @@ export const syncUserCreation = inngest.createFunction(
         image: data?.image_url ?? "",
       },
     });
-  }
+  },
 );
 
 /* ---------------- DELETE USER ---------------- */
@@ -35,7 +35,7 @@ export const syncUserDeletion = inngest.createFunction(
     await prisma.user.delete({
       where: { id: data.id },
     });
-  }
+  },
 );
 
 /* ---------------- UPDATE USER ---------------- */
@@ -55,12 +55,21 @@ export const syncUserUpdation = inngest.createFunction(
         image: data?.image_url ?? "",
       },
     });
-  }
+  },
 );
 
 /* export list */
-export const functions = [
-  syncUserCreation,
-  syncUserDeletion,
-  syncUserUpdation,
-];
+export const functions = [syncUserCreation, syncUserDeletion, syncUserUpdation];
+
+// Diagnostics to verify Inngest function registration
+console.log(
+  "[inngest] inngest.createFunction type:",
+  typeof inngest.createFunction,
+);
+console.log("[inngest] syncUserCreation defined:", !!syncUserCreation);
+console.log("[inngest] syncUserDeletion defined:", !!syncUserDeletion);
+console.log("[inngest] syncUserUpdation defined:", !!syncUserUpdation);
+console.log(
+  "[inngest] functions array valid entries:",
+  functions.map((f) => !!f),
+);
