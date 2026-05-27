@@ -1,11 +1,5 @@
-import "dotenv/config";
-import { defineConfig, env } from "prisma/config";
+import { PrismaClient } from "@prisma/client";
 
-export default defineConfig({
-  schema: "prisma/schema.prisma",
+const prisma = new PrismaClient();
 
-  datasource: {
-    url: env("DATABASE_URL"),
-    directUrl: env("DIRECT_URL"),
-  },
-});
+export default prisma;
